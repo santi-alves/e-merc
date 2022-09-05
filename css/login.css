@@ -1,0 +1,33 @@
+/* --------------- En Desuso -------------- */
+/* ----------------- Clases generales de utilidad ----------------- */
+/* .dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.visHidden {
+    visibility: hidden;
+}
+
+.visVisibleInvalid {
+    visibility: visible;
+    color: rgb(148, 11, 11);
+}
+
+.visVisibleValid {
+    visibility: visible;
+    color: rgb(90, 209, 60);
+}
+
+.validInput {
+    border: 0.2rem solid rgb(90, 209, 60);
+    border-radius: 2%;
+}
+
+.invalidInput {
+    border: 0.2rem solid rgb(148, 11, 11);
+    border-radius: 2%;
+} */
