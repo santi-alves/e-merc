@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* --- fin Guardar cantidad productos localstorage v3 PREV ACTIVO --- */
 
   /* --- cargar email usuario ---- */
-  loadUserEmail("#navbar-dropdown-user");
+  // loadUserEmail("#navbar-dropdown-user");
   /* --- fin cargar email usuario --- */
 
   const btnDelete = document.querySelector("#btn-delete");

@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", async function (e) {
   /* ------- Fin Formulario comentarios ------- */
 
   /* ------------- Muestra email del usuario guardado en localStorage ------------- */
-  loadUserEmail("#navbar-dropdown-user");
+  //loadUserEmail("#navbar-dropdown-user");
   /* ------------ */
 
   /* ------- Bootstrap Popovers Inicializador ------- */

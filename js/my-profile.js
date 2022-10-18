@@ -1,1 +1,1 @@
-loadUserEmail("#navbar-dropdown-user");
+//loadUserEmail("#navbar-dropdown-user");

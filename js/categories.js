@@ -183,6 +183,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
       showCategoriesList();
     });
   /* ------------- Muestra email del usuario guardado en localStorage ------------- */
-  loadUserEmail("#navbar-dropdown-user");
+  // loadUserEmail("#navbar-dropdown-user");
   /* -------------------------- */
 });
