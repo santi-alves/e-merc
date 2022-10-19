@@ -63,10 +63,12 @@ function setCatID(id) {
 }
 /* ---------- */
 
-/* ------------- Funcion que muestra email del usuario guardado en localStorage ------------- */
+/* ------------- Funcion que muestra email del usuario guardado en localStorage REACT ------------- */
 function loadUserEmail(cssSlctr) {
-  return (document.querySelector(cssSlctr).innerHTML =
-    localStorage.getItem("userEmail"));
+  if (location.pathname != "/index.html") {
+    return (document.querySelector(cssSlctr).innerHTML =
+      localStorage.getItem("userEmail"));
+  }
 }
 /* ---------------------------------- */
 
@@ -85,11 +87,15 @@ const logInCheck = () => {
     localStorage.getItem("userEmail") === null
   ) {
     location.pathname = "/index.html";
+  } else if (location.pathname != "/index.html") {
+    //añadido
+    document.querySelector("#navbar-dropdown-user").innerHTML =
+      localStorage.getItem("userEmail");
+    console.log("El usuario inició sesión correctamente");
   }
-  console.log("El usuario inició sesión correctamente");
 };
 
-/* document.onload = */ logInCheck();
+/* document.onload = logInCheck(); */
 /* --- fin Verificacion inicio sesion ---- */
 
 /* --- DOMContentLoaded ---- */
@@ -101,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //const navEmail = document.querySelector("#idNavEmail");
   const navLogout = document.querySelector("#idLogout");
 
-  /* --- cargar email usuario ---- */
-  loadUserEmail("#navbar-dropdown-user");
+  /* --- cargar email usuario REACT ---- */
+  //loadUserEmail("#navbar-dropdown-user");
   /* --- fin cargar email usuario --- */
 
   /* --- Previene envio de todos los formularios --- */
@@ -148,5 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 }); */
   /* --- fin Verificar validación temporal --- */
+
+  logInCheck();
 });
 /* --- fin DOMContentLoaded ---- */
