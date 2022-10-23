@@ -10,11 +10,7 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
 const emercadoAPI = "https://japceibal.github.io/emercado-api/";
-/* ----------------- Definicion de Variables ----------------- */
-// --- No se usa mas ??? ---
-//const navEmail = document.querySelector("#idNavEmail");
-const navLogout = document.querySelector("#idLogout");
-
+var dcmnt = new Window.prototype.document();
 /* ----------------- Definicion de Funciones  ----------------- */
 let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
