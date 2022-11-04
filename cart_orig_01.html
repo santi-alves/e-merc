@@ -176,10 +176,10 @@
                     <div class="card mb-3 border-0 rounded-borders shadow-sm z-index-auto sticky-top">
                         <div class="card-body">
                             <!-- titulo product info -->
-                            <h3 id="product-details-title" class="card-title">Detalle</h3>
-                            <!-- <h5 class="h-3rm mb-3 fw-bold" id="subtotal-cost" class="card-text">
-                                <!- subtotal ->
-                            </h5> -->
+                            <h3 id="product-details-title" class="card-title">Subtotal a pagar</h3>
+                            <h5 class="h-3rm mb-3 fw-bold" id="subtotal-cost" class="card-text">
+                                <!-- subtotal -->
+                            </h5>
                             <!-- --- tipo de envio ---  -->
                             <h4>Tipo de envío</h4>
                             <form id="frm-buy" class="form-floating" action="#" method="get" aria-required="true"
@@ -204,7 +204,7 @@
 
                                     <div class="form-check">
                                         <input class="form-check-input inpt-checked-indigo" type="radio"
-                                            name="type-delivery" id="standard-delivery" value="5" required>
+                                            name="type-delivery" id="standard-delivery" value="5" checked required>
                                         <label class="form-check-label" for="standard-delivery">
                                             Standard 12 a 15 días (5%)
                                         </label>
@@ -243,30 +243,30 @@
 
                                 <!-- Costos -->
                                 <h4>Costos</h4>
-                                <div>
+                                <div id="unitary-subtotal">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <p class="my-0">Subtotal general</p>
-                                        <p id="subtotal-general-products" class="text-muted pe-3 my-0">
+                                        <p id="title-{i}" class="my-0">Subtotal</p>
+                                        <p class="text-muted pe-3 my-0">USD 15200
                                             <!-- insertar variable -->
                                         </p>
                                     </div>
-                                    <p class="small text-muted">Costo unitario de cada producto por la cantidad</p>
+                                    <p class="small text-muted">Costo unitario del producto por cantidad</p>
                                 </div>
 
-                                <div>
+                                <div id="shipping-cost">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <p class="my-0">Costo de envío</p>
-                                        <p id="shipping-cost" class="text-muted pe-3 my-0">
+                                        <p id="title-{i}" class="my-0">Costo de envío</p>
+                                        <p class="text-muted pe-3 my-0">USD 456
                                             <!-- insertar variable -->
                                         </p>
                                     </div>
                                     <p class="small text-muted">Según el tipo de envío seleccionado</p>
                                 </div>
 
-                                <div>
+                                <div id="total-cost">
                                     <div class="d-flex w-100 justify-content-between">
-                                        <p class="my-0">Total a pagar</p>
-                                        <p id="total-cost" class="text-muted pe-3 my-0">
+                                        <p id="title-{i}" class="my-0">Total a pagar</p>
+                                        <p class="text-muted pe-3 my-0">USD 15656
                                             <!-- insertar variable -->
                                         </p>
                                     </div>
@@ -317,7 +317,7 @@
                                     data-bs-target="#mdl-pay-method">
                                     Seleccionar
                                 </button>
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" form="mdl-form">
                                     Debes seleccionar un medio de pago.
                                 </div>
                                 <!-- fin medios de pago Bs Modal -->
@@ -405,8 +405,8 @@
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input inpt-checked-indigo" type="radio"
-                                        name="payment-method" id="radio-payment-method-credit-card" required>
-                                    <label class="form-check-label" for="radio-payment-method-credit-card">
+                                        name="payment-method" id="rdio-payment-method-credit-card" checked required>
+                                    <label class="form-check-label" for="rdio-payment-method-credit-card">
                                         Tarjeta de crédito
                                     </label>
                                 </div>
@@ -414,15 +414,15 @@
                             <div class="col">
                                 <div class="form-check">
                                     <input class="form-check-input inpt-checked-indigo" type="radio"
-                                        name="payment-method" id="radio-payment-method-bank-transference" required>
+                                        name="payment-method" id="rdio-payment-method-bank-transference" required>
                                     <label class="form-check-label"
-                                        for="radio-payment-method-bank-transference">Transferencia bancaria
+                                        for="rdio-payment-method-bank-transference">Transferencia bancaria
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <!-- inputs modal tarjeta de credito -->
-                        <fieldset id="mdl-fieldset-credit-card" disabled>
+                        <fieldset id="mdl-fieldset-credit-card">
                             <div class="form-floating col-auto mb-2">
                                 <input type="text" class="form-control rounded-borders" id="inpt-card-number"
                                     aria-describedby="card-number-help" placeholder="Número de tarjeta" maxlength="16"
@@ -435,7 +435,7 @@
                             <div class="form-floating col-auto mb-2">
                                 <input type="password" class="form-control rounded-borders" id="inpt-card-security-code"
                                     aria-describedby="card-security-code-help" placeholder="Código de seguridad"
-                                    maxlength="4" pattern="[0-9]{4}" autocomplete="off" required>
+                                    maxlength="4" pattern="[0-9]{4}" required>
                                 <label for="inpt-card-security-code" class="form-label">Código de seguridad</label>
                                 <div class="invalid-feedback text-end">
                                     Debes ingresar un código válido.
@@ -469,8 +469,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn bg-indigo text-light rounded-pill btn-indigo-hover"
-                        data-bs-dismiss="modal"><strong>Confirmar</strong></button>
+                    <button type="button"
+                        class="btn bg-indigo text-light rounded-pill btn-indigo-hover"><strong>Confirmar</strong></button>
                 </div>
             </div>
         </div>
@@ -480,8 +480,8 @@
 
     <!-- Alerta compra exitosa -->
     <div id="alert-purchase-succesful"
-        class="alert alert-light alert-dismissible fade show text-center shadow-sm d-none z-index-top" role="alert">
-        <h5><strong class="text-indigo">Tu compra se ha realizado con éxito!</strong></h5> ¿Deseas seguir comprando? <a
+        class="alert alert-light alert-dismissible fade show text-center shadow-sm d-none" role="alert">
+        <h5><strong class="text-indigo">Su compra se ha realizado con éxito!</strong></h5> ¿Desea seguir comprando? <a
             href="categories.html" class="alert-link text-decoration-none">Volver
             a categorías</a>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -493,8 +493,7 @@
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
 
-    <!--  <script src="src/total_to_pay/total_to_pay.js"></script> -->
-    <script src="src/total_to_pay/total_to_pay_final.js"></script>
+    <script src="src/total_to_pay/total_to_pay.js"></script>
     <script src="src/payment_methods/payment_methods.js"></script>
     <script src="src/confirm_purchase/confirm_purchase.js"></script>
 

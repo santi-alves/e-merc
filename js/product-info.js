@@ -1,3 +1,7 @@
+/* --- import test 01 --- */
+//import { heading_1 } from "src/h1_title/h1_title";
+/* --- fin import test 01 --- */
+
 let objProductInfo = {};
 let arrProductComments = [];
 let objProductInfoRelatedExtra;
@@ -21,7 +25,6 @@ const fetchInfo = async (url) => {
     );
   }
 };
-
 /* --- fin fetch producto pre-cargado(REVISAR FUNCIONALIDAD) --- */
 
 /* --------- Funcion que almacena id del producto en almacenamiento local --------- */
@@ -215,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async function (e) {
       };
 
       let arrProds = JSON.parse(localStorage.getItem("cartProducts"));
-      if (arrProds === null) {
+      if (arrProds === null || arrProds === undefined) {
         arrProds = [];
         arrProds.push(objRightFormat);
       } else {
@@ -341,6 +344,7 @@ document.addEventListener("DOMContentLoaded", async function (e) {
                commentDateTime.getDate() +
                " " +
                commentDateTime.getHours() +
+               heading_1("uwu Xd :v") +
                ":" +
                commentDateTime.getMinutes() +
                ":" +

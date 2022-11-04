@@ -378,16 +378,6 @@ a:hover {
 
 /* ---- Fin navbar(revisar) ---- */
 
-/* --- z-index-top --- */
-.z-index-top {
-  z-index: 1111 !important;
-  top: 10vh;
- /*  bottom: 1vh; */
-}
-/* --- fin z-index-top --- */
-
-
-
 /* --- ocultar spinner input number NO FUNCIONA --- */
 /* [pseudo="-webkit-inner-spin-button"], #spin {
   display: none !important;

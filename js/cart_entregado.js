@@ -22,17 +22,12 @@ const fetchInfo = async (url) => {
 document.addEventListener("DOMContentLoaded", async () => {
   /* --- definicion variables --- */
   const cartPreloadedProds = await fetchInfo(cartURL);
-  let {
-    id,
-    name,
-    currency,
-    unitCost,
-    count: amount,
-    image,
-  } = cartPreloadedProds.articles[0];
+  let { id, name, currency, unitCost, count, image } =
+    cartPreloadedProds.articles[0];
   const containerProducts = document.querySelector("#container-products");
   // REACTIVAR 03 ---> const cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
 
+  //let amountProduct = document.querySelector("#amount-product");
   const subtotalProduct = document.querySelector("#subtotal-cost");
 
   const stndrDelivery = document.querySelector("#standard-delivery");
@@ -42,14 +37,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const radiosShippingType = document.querySelectorAll("[name=type-delivery]");
   //const radioShippingType = document.querySelector("[name=type-delivery]:checked");
 
-  const subtotalGeneral = document.querySelector("#subtotal-general");
-  const shippingCostGeneral = document.querySelector("#shipping-cost");
-  const totalCostGeneral = document.querySelector("#total-cost");
+  const subtotalGeneral = document.querySelector("#p-subtotal-general");
+  const shippingCostGeneral = document.querySelector("#p-shipping-cost");
+  const totalCostGeneral = document.querySelector("#p-total-cost");
 
   /* --- fin definicion variables --- */
 
   /* --- Llamado funciones --- */
-  /* --- obtener producto precargado carrito --- */
+  /* --- obtener producto precargado carrito REACTIV --- */
   function getCartPreloadedProducts() {
     /* --- producto carrito categories template --- */
     /* <div id="containerProd-{i}" onclick="setProductID(${id})" class="list-group-item list-group-item-action cursor-active p-0 border-0 mb-3 rounded-borders shadow-sm"> */
@@ -59,58 +54,56 @@ document.addEventListener("DOMContentLoaded", async () => {
         <img src="${image}" alt="" class="img-thumbnail p-0 border-0 rounded-borders" onclick="setProductID(${id})">
     </div>
     <div class="col">
-        <div class="d-flex w-100 justify-content-evenly pt-3">
-          <div>
-            <h4 id="title-{i}" class="mb-1 d-inline" onclick="setProductID(${id})">${name} </h4>
-            <h5 class="text-muted d-inline pe-3">- ${currency} ${unitCost}</h5>
-          </div>  
-
-          <form id="frm-product-amount" class="" action="#" method="get" novalidate>
-        <div class="form-floating col-8">
-      <input id="amount-product" class="form-control rounded-borders" type="number" name="" min="1" value="${amount}" placeholder="Cantidad" required>
+        <div class="d-flex w-100 justify-content-between pt-3">
+            <h4 id="title-{i}" class="mb-1" onclick="setProductID(${id})">${name}</h4>
+            <h4 class="text-muted pe-3">${currency} ${unitCost}</h4>
+        </div>
+        <!-- <p class="mb-1">descripcion</p> -->
+         
+        <form class=" row align-items-center" action="#" method="get" novalidate>
+        <div class="form-floating col-3">
+      <input id="amount-product" class="form-control rounded-borders" type="number" name="" min="1" value="${
+        /* cartPreloadedProds.articles[0]. */ count
+      }" placeholder="Cantidad" required>
       <label class="form-label" for="amount-product">Cantidad</label>
-     
-      <!-- <div class="invalid-feedback">
+      
+      
+      <div class="invalid-feedback">
       Debes tener al menos 1 artículo en el carrito.
-      </div> -->
-  </div>
-    </form>
 
-          <h4 id="subtotal-product" class="text-muted pe-3">${currency} ${unitCost}</h4> 
-        
-          <div class="col my-auto me-3">
-          <button id="btn-delete" class="btn btn-close " type="button" form="frm-product-amount"></button>
-          </div>
-        
-          </div>
-        
-       
-        
+
+      </div>
+  </div>
+
+      <div class="col">
+      <button id="btn-delete" class="btn btn-close" type="button"></button>
+      </div>
+    </form>
     
     </div>
+    <!-- ELIM <span class="" id="subtotal-cost">
+    subtotal ${currency} ${unitCost * count} 
+  </span> --> 
 </div>
 </div>`;
     /* --- fin producto carrito categories template --- */
   }
-  /* --- fin obtener producto precargado carrito --- */
+  /* --- fin obtener producto precargado carrito REACTIV --- */
 
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
+  /* --- fin calcular subtotal producto 01 ORIGINAL --- */
+
   /* --- calcular subtotal producto 02 NO CURRENCY --- */
-  /*  function getProductSubtotal(prodAmount, prodCost) {
-    if (prodAmount /* .value / >= 1) {
+  function getProductSubtotal(prodAmount, prodCost) {
+    if (prodAmount /* .value */ >= 1) {
       return prodAmount * prodCost;
     } else {
       return (prodAmount = 0);
     }
-  } */
+  }
   /* --- fin calcular subtotal producto 02 NO CURRENCY --- */
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
-
   //console.log("getProductSubtotal: ", getProductSubtotal(-5, 25));
   /* --- calcular costo envio producto --- */
-
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
-  /* function getShippingCost(productCost, shippingCostPercent) {
+  function getShippingCost(productCost, shippingCostPercent) {
     return (productCost * shippingCostPercent) / 100;
   }
 
@@ -133,8 +126,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       shippingCost_1_Product: shippingCost_1_Product,
       totalToPay_1_Product: totalToPay_1_Product,
     });
-  } */
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
+  }
+
   /* --- saber cual radio esta seleccionado --- */
   const whichIsChecked = (nodeListToCheck) => {
     return nodeListToCheck.forEach((element) => {
@@ -147,31 +140,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   /* --- fin calcular costo envio producto --- */
 
-  /* --- carrito precargado --- */
+  /* --- REACTIVAR --- */
   containerProducts.innerHTML += getCartPreloadedProducts();
-  /* --- fin carrito precargado --- */
+  /* --- fin REACTIVAR --- */
 
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
   /* --- Subtotal inicial --- */
-  /*  subtotalProduct.innerHTML =
-    currency + " " + getProductSubtotal(amount, unitCost);
-  /* --- fin Subtotal inicial --- /
+  subtotalProduct.innerHTML =
+    currency + " " + getProductSubtotal(count, unitCost /*,  currency */);
+  /* --- fin Subtotal inicial --- */
 
-  /* --- Subtotal inicial conjunto(AGREGAR COSTO ENVIO, TOTAL A PAGAR) --- /
+  /* --- Subtotal inicial conjunto --- */
   subtotalGeneral.innerHTML =
-    currency + " " + getProductSubtotal(amount, unitCost); */
-  /* --- fin Subtotal inicial conjunto(AGREGAR COSTO ENVIO, TOTAL A PAGAR) --- */
-  /* --- funciones todos los costos REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
+    currency + " " + getProductSubtotal(count, unitCost);
+  /* --- fin Subtotal inicial conjunto --- */
 
-  /* --- Hacer que sea una funcion para reutilizarla --- */
+  /* --- Carrito original --- */
+  /*  const objRespCart = await userCartDetails(cartURL);
+  containerProducts.innerHTML += `<tr>
+  <td class="w-25"><img id="img-product" class="img-thumbnail w-75" src="${
+    objRespCart.articles[0].image
+  }" alt=""></td>
+  <td class="align-middle" id="name-product">${
+    objRespCart.articles[0].name
+  }</td>
+  <td class="align-middle" id="unit-currency-cost">${
+    objRespCart.articles[0].currency + " " + objRespCart.articles[0].unitCost
+  }</td>
+  <td>
+    <form class="form-floating" action="" method="">
+      <input id="amount-product" class="form-control-sm" type="number" name="" min="1" value="${
+        objRespCart.articles[0].count
+      }">
+    </form>
+  </td>
+  <td class="align-middle" id="subtotal-cost">
+    <!-- subtotal -->
+  </td>
+</tr>`; */
+  /* --- fin Carrito original --- */
+
+  /* --- Hacer que sea una funcion para reutilizarla REACTIVAR --- */
   let amountProduct = document.querySelector("#amount-product");
 
-  /* --- subtotal, costo envio, total a pagar radioChange REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
+  /* --- subtotal, costo envio, total a pagar --- */
   let allCosts_1_Product = {};
-  /*radiosShippingType.forEach((radio) => {
+  radiosShippingType.forEach((radio) => {
     radio.addEventListener("change", (chng) => {
       /* --- BLOQUE FUNCIONAL PREV ACTIVO --- */
-  /*  let subtotal_1_Product = getProductSubtotal(
+      /*  let subtotal_1_Product = getProductSubtotal(
           amountProduct.value,
           unitCost
         );
@@ -188,8 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           shippingCost_1_Product: shippingCost_1_Product,
           totalToPay_1_Product: totalToPay_1_Product,
         }); */
-  /* --- FIN BLOQUE FUNCIONAL PREV ACTIVO --- /
-
+      /* --- FIN BLOQUE FUNCIONAL PREV ACTIVO --- */
       console.log(getAllCost_1_Product(amountProduct, unitCost, radio));
       getAllCost_1_Product(amountProduct, unitCost, radio);
 
@@ -210,10 +225,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             radio.value
           ));
     });
-  }); */
-  /* --- fin  /* --- subtotal, costo envio, total a pagar radioChange REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
+  });
+  /* --- fin subtotal, costo envio, total a pagar --- */
 
-  /* --- no se esta usando --- */
   function getAllCostAmountChangeProduct(amountProduct, unitCost, elements) {
     let subtotal_1_Product = getProductSubtotal(amountProduct.value, unitCost);
     let shippingCost_1_Product;
@@ -234,18 +248,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       totalToPay_1_Product: totalToPay_1_Product,
     });
   }
-  /* --- no se esta usando --- */
-  /* --- subtotal, costo envio, total a pagar inputAmount + radioChange REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
-  /* amountProduct.addEventListener("input", () => {
+
+  amountProduct.addEventListener("input", () => {
     radiosShippingType.forEach((radio) => {
       radio.addEventListener("change", (chng) => {
         subtotalProduct.innerHTML =
           currency + " " + getProductSubtotal(amountProduct.value, unitCost);
 
-        /* --- Subtotal conjunto --- /
+        /* --- Subtotal conjunto --- */
         subtotalGeneral.innerHTML =
           currency + " " + getProductSubtotal(amountProduct.value, unitCost);
-        /* --- fin Subtotal conjunto --- /
+        /* --- fin Subtotal conjunto --- */
 
         console.log(subtotalGeneral.innerHTML.slice(4));
 
@@ -256,9 +269,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             getProductSubtotal(amountProduct.value, unitCost),
             radio.value //subtotalGeneral.innerHTML.slice(4)
           );
-        /* --- fin costo envio conjunto --- /
+        /* --- fin costo envio conjunto --- */
 
-        /* --- total a pagar conjunto --- /
+        /* --- total a pagar conjunto --- */
 
         totalCostGeneral.innerHTML =
           currency +
@@ -268,13 +281,11 @@ document.addEventListener("DOMContentLoaded", async () => {
               getProductSubtotal(amountProduct.value, unitCost),
               radio.value //subtotalGeneral.innerHTML.slice(4)
             ));
-        /* --- fin total a pagar conjunto --- /
+        /* --- fin total a pagar conjunto --- */
       });
     });
-  }); */
-  /* --- fin subtotal, costo envio, total a pagar inputAmount + radioChange REACTIVAR SI total_to_pay_final NO FUNCIONA --- */
-
-  /* --- fin Hacer que sea una funcion para reutilizarla --- */
+  });
+  /* --- fin Hacer que sea una funcion para reutilizarla REACTIVAR --- */
 
   /* --- fin Llamado funciones --- */
 
@@ -285,7 +296,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     //subtotalGeneral.innerHTML = getCheckedRadioShippingType(radiosShippingType);
     /* --- Subtotal inicial conjunto --- */
     /* subtotalGeneral.innerHTML =
-      currency + " " + getProductSubtotal(amount, unitCost); */
+      currency + " " + getProductSubtotal(count, unitCost); */
     /* --- fin Subtotal inicial conjunto --- */
   });
   /* --- fin Guardar cantidad productos localstorage v3 PREV ACTIVO --- */
@@ -295,47 +306,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* --- fin cargar email usuario --- */
 
   const btnDelete = document.querySelector("#btn-delete");
-  btnDelete.onclick = (clck) => {
-    console.log(clck.currentTarget.parentElement);
+  btnDelete.onclick = (evnt) => {
     function itemRemove(itemsToRemove, removeFromUI) {
       for (const child of itemsToRemove.children) {
         child.remove();
+        removeFromUI.innerHTML = "";
       }
-      removeFromUI.forEach((element) => {
-        element.innerHTML = "";
-      });
     }
-    itemRemove(containerProducts, [
-      subtotalProduct,
-      subtotalGeneral,
-      shippingCostGeneral,
-      totalCostGeneral,
-    ]);
+    itemRemove(containerProducts, subtotalProduct);
   };
-  /* --- diferentes selectores btnDelete --- */
-  // JS path = document.querySelector("#btn-delete")
-  // xpath = //*[@id="btn-delete"]
-  // full xpath = /html/body/main/div/div/div[1]/div/div/div[2]/form/div[2]/button
-  /* --- fin diferentes selectores btnDelete --- */
-
-  /* --- script dinamico StckOvrflw --- */
-  /* const scriptPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    document.body.appendChild(script);
-    script.onload = resolve;
-    script.onerror = reject;
-    script.async = true;
-    script.src = "src/total_to_pay/total_to_pay_final.js";
-  });
-
-  scriptPromise.then(() => {
-    console.log(arrProducts);
-  }); */
-  /* --- fin script dinamico StckOvrflw --- */
-
-  /* --- script dinamico mio --- */
-  /* document.body.innerHTML +=
-    '<script src="src/total_to_pay/total_to_pay_final.js"></script>'; */
-  /* --- fin script dinamico mio --- */
 });
 /* --- fin DOMContentLoaded --- */
