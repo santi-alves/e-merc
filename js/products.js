@@ -99,7 +99,7 @@ function showProductsList() {
                       <h4 id="title-${i}" class="mb-1">${product.name} - ${product.currency} ${product.cost}</h4>
                       <small class="text-muted pe-3">${product.soldCount} vendidos</small>
                   </div>
-                  <p class="mb-1">${product.description}</p>
+                  <p id="product-description-${i}" class="mb-1">${product.description}</p>
               </div>
           </div>
       </div>`;

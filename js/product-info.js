@@ -344,7 +344,6 @@ document.addEventListener("DOMContentLoaded", async function (e) {
                commentDateTime.getDate() +
                " " +
                commentDateTime.getHours() +
-               heading_1("uwu Xd :v") +
                ":" +
                commentDateTime.getMinutes() +
                ":" +

@@ -77,7 +77,7 @@ function loadUserEmail(cssSlctr) {
 /* --- Fin Elimina email de local storage TERMINAR --- */
 
 /* --- Verificacion inicio sesion ---- */
-const logInCheck = () => {
+const logInCheck = (elementToInsert) => {
   if (
     location.pathname != "/index.html" &&
     localStorage.getItem("userEmail") === null
@@ -85,7 +85,7 @@ const logInCheck = () => {
     location.pathname = "/index.html";
   } else if (location.pathname != "/index.html") {
     //añadido
-    document.querySelector("#navbar-dropdown-user").innerHTML =
+    /* document.querySelector("#navbar-dropdown-user") */ elementToInsert.innerHTML =
       localStorage.getItem("userEmail");
     console.log("El usuario inició sesión correctamente");
   }
@@ -100,7 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const navFormSearch = document.querySelector("#nav-form-search");
   const formsAll = document.querySelectorAll("form");
   // --- No se usa mas ??? ---
-  //const navEmail = document.querySelector("#idNavEmail");
+  const navMyProfile = document.querySelector("#nav-my-profile");
+  const navUserEmail = document.querySelector("#navbar-dropdown-user");
   const navLogout = document.querySelector("#idLogout");
 
   /* --- cargar email usuario REACT ---- */
@@ -108,11 +109,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* --- fin cargar email usuario --- */
 
   /* --- Previene envio de todos los formularios --- */
-  formsAll.forEach((form) => {
-    form.addEventListener("submit", (submit) => {
-      submit.preventDefault();
+  const preventFormSubmission = (frmNodeList) => {
+    frmNodeList.forEach((form) => {
+      form.addEventListener("submit", (submitEvent) => {
+        submitEvent.preventDefault();
+        submitEvent.stopPropagation();
+        console.log("default prevented");
+      });
     });
-  });
+  };
+
+  preventFormSubmission(formsAll);
   /* --- fin Previene envio de todos los formularios --- */
 
   /* --- Previene envio de todos los formularios test 01 CONTIN--- */
@@ -151,6 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }); */
   /* --- fin Verificar validación temporal --- */
 
-  logInCheck();
+  logInCheck(navUserEmail);
 });
 /* --- fin DOMContentLoaded ---- */

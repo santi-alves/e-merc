@@ -1,155 +1,120 @@
-/* --- DOMContentLoaded --- */
-document.addEventListener("DOMContentLoaded", (dmcntld) => {
-  // El subtotal general: la suma de los subtotales (costo por cantidad) de todos los artículos
-  /* --- arr de prueba funciones --- */
-  const arrProducts = [
-    (prod_4 = { id: 39, unitCost: 3.5, count: 83 }),
-    (prod_1 = { id: 7, unitCost: 1000, count: 5 }),
-    (prod_5 = { id: 378, unitCost: 13, count: 22 }),
-    (prod_1 = { id: 7, unitCost: 751, count: 1 }),
-    (prod_3 = { id: 25, unitCost: 79, count: 1 }),
-    (prod_2 = { id: 9, unitCost: 27, count: 3 }),
-  ];
-  // logica sort: a - b = [378, 39, 25, 9, 7, 7] ???
-  // console.log(arrProducts[0] instanceof Object);
-  //console.log(arrProducts[1].id);
-  /* --- fin arr de prueba funciones --- */
+import { fetchData } from "../fetch/fetch.js";
 
-  /* --- set test --- */
-  /*  const set_01 = new Set([3, 831, "m", "3", 0.99, 831]);
-  console.log(set_01.add("🥟")); */
-  /* --- fin set test --- */
+/* --- DOMContentLoaded --- */
+document.addEventListener("DOMContentLoaded", async (dmcntld) => {
+  // El subtotal general: la suma de los subtotales (costo por cantidad) de todos los artículos
+
+  /* --- fetch repetido --- */
+  const cartPreloadedProds = await fetchData(CART_INFO_URL + 25801 + EXT_TYPE);
+  const [articles] = cartPreloadedProds.articles;
+  const { id, name, currency, unitCost, count: amount, image } = articles;
+
+  const radiosShippingType = document.querySelectorAll("[name=type-delivery]");
+  const amountProduct = document.querySelector("#amount-product");
+
+  const subtotalProduct = document.querySelector("#subtotal-product");
+  const subtotalGeneral = document.querySelector("#subtotal-general-products");
+  const shippingCostGeneral = document.querySelector("#shipping-cost");
+  const totalCostGeneral = document.querySelector("#total-cost");
+
+  const arrSubtotalEachProduct = [];
+  /* --- fin fetch repetido --- */
 
   /* --- subtotal producto individual --- */
-  const getSubtotalProduct = (productCost, productCount) => {
-    return productCost * productCount;
+  const getSubtotalProduct = (productCost, productAmount) => {
+    if (productAmount < 0) {
+      productAmount = 0;
+    }
+    return productCost * productAmount;
   };
-  console.log(
-    "getSubtotalProduct",
-    getSubtotalProduct(arrProducts[5].unitCost, arrProducts[5].count)
-  );
+
+  /* --- intento devolviendo array de subtotales (no se utiliza) ---  */
+  const getArraySubtotalEachProduct = (productCost, productAmount) => {
+    const arrSubtotalEachProduct = [];
+    if (productAmount < 0) {
+      productAmount = 0;
+    }
+    arrSubtotalEachProduct.push(productCost * productAmount);
+    return arrSubtotalEachProduct;
+  };
+  /* --- fin intento devolviendo array de subtotales (no se utiliza) ---  */
   /* --- fin subtotal producto individual --- */
 
-  /* --- subtotal muchos productos forEach  --- */
-  const getSubtotalGeneralProducts = (arrProducts) => {
-    let subtotalAllProducts = 0;
-    arrProducts.forEach((prod) => {
-      return (subtotalAllProducts += getSubtotalProduct(
-        prod.unitCost,
-        prod.count
-      ));
+  /* --- subtotal muchos productos forEach (no se utiliza) --- */
+  const getSubtotalGeneralProducts = (getSubtotalProduct) => {
+    let subtotalGeneralProducts = 0;
+    [{ unitCost, amount }].forEach(() => {
+      subtotalGeneralProducts += getSubtotalProduct(unitCost, amount);
     });
-    return subtotalAllProducts;
+    return subtotalGeneralProducts;
   };
-  console.log(
-    "getSubtotalGeneralProducts:",
-    getSubtotalGeneralProducts(arrProducts)
-  );
-  /* --- fin subtotal muchos productos forEach  --- */
+  /* --- fin subtotal muchos productos forEach (no se utiliza) --- */
 
-  /* --- array subtotal varios productos --- */
-  const getArrSubtotalsOfProductsMapped = (arrProducts) => {
-    return arrProducts.map((prod) => {
-      return getSubtotalProduct(prod.unitCost, prod.count);
+  /* --- array subtotal varios productos (no se utiliza) --- */
+  const getArrSubtotalsOfProductsMapped = (
+    /*[{ unitCost, amount } 
+  ]*/ arrOfSubtotalProds
+  ) => {
+    return /* { unitCost, amount } */ arrOfSubtotalProds.map((prod) => {
+      return getSubtotalProduct(prod.unitCost, prod.amount);
     });
   };
   console.log(
-    "getArrSubtotalsOfProductsMapped:",
-    getArrSubtotalsOfProductsMapped(arrProducts)
+    "getArrSubtotalsOfProductsMapped: ",
+    getArrSubtotalsOfProductsMapped([
+      { unitCost: 5, amount: 2 },
+      { unitCost: 5, amount: 7 },
+      { unitCost: 4, amount: 6 },
+    ])
   );
+  /* --- fin array subtotal varios productos (no se utiliza) --- */
 
-  /* --- fin array subtotal varios productos --- */
-
-  /* --- subtotal general productos (suma subtotales individuales) --- */
-  const getSubtotalGeneralReduced = (arrSubtotalsOfProducts) => {
-    return arrSubtotalsOfProducts.reduce((prevProd, currProd) => {
+  /* --- subtotal general productos (suma subtotales individuales) (no se utiliza) --- */
+  const getSubtotalGeneralReduced = (/* [arrNumbers] */ arrOfNumbers) => {
+    return /* [arrNumbers] */ arrOfNumbers.reduce((prevProd, currProd) => {
       return prevProd + currProd;
     });
   };
   console.log(
-    "getSubtotalGeneralReduced:",
-    getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts))
+    "getSubtotalGeneralReduced: ",
+    getSubtotalGeneralReduced([10, 35, 24])
   );
-  /* --- fin subtotal general productos (suma subtotales individuales) --- */
+  /* --- fin subtotal general productos (suma subtotales individuales) (no se utiliza) --- */
 
   //El costo de envío: calculado a partir del envío seleccionado por el usuario (5%, 7% o 15%) y siendo un porcentaje del valor anterior (el subtotal).
-  const shippingType = { standard: 5, express: 7, premium: 15 };
   const getShippingCost = (productCost, shippingCostPercent) => {
     return (productCost * shippingCostPercent) / 100;
   };
 
-  console.log(
-    "El costo unitario del productos es: $",
-    arrProducts[0].unitCost,
-    "\n el porcentaje del envío unitario es:",
-    shippingType.premium,
-    "%",
-    "\n el valor del envio por la compra unitaria es: $",
-    getShippingCost(arrProducts[0].unitCost, shippingType.premium)
-  );
-
   //El total a pagar: la suma de los dos valores anteriores.
-  const totalToPay = (subtotalProduct, shippingCost) => {
+  const getTotalToPay = (subtotalProduct, shippingCost) => {
     return subtotalProduct + shippingCost;
   };
-  console.log(
-    `El subtotal de todos los productos es: $ ${getSubtotalGeneralReduced(
-      getArrSubtotalsOfProductsMapped(arrProducts)
-    )},\n el porcentaje del envío es: ${
-      shippingType.express
-    }%,\n el valor del envio por la compra total es: $ ${getShippingCost(
-      getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts)),
-      shippingType.express
-    )} \n el valor total de la compra es: $ ${totalToPay(
-      getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts)),
-      getShippingCost(
-        getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts)),
-        shippingType.express
-      )
-    )}`
-  );
-  console.log(
-    "totalToPay:",
-    totalToPay(
-      getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts)),
-      getShippingCost(
-        getSubtotalGeneralReduced(getArrSubtotalsOfProductsMapped(arrProducts)),
-        shippingType.express
-      )
-    )
-  );
 
   /* --- findIndex segun id --- */
-  const foundIndex = arrProducts.findLastIndex((prod) => {
-    return prod.id === 7;
+  const foundIndex = [articles].findIndex((prod) => {
+    return prod.id === 50924;
   });
-  console.log("foundIndex:", foundIndex);
+  //console.log("foundIndex:", foundIndex);
   /* --- fin findIndex segun id --- */
 
   /* --- findValue segun id --- */
-  const foundValue = arrProducts.findLast((prod) => {
-    return prod.id === 7;
+  const foundValue = [articles].find((prod) => {
+    return prod.id === 50924;
   });
-  console.log("foundValue:", foundValue);
+  //console.log("foundValue:", foundValue);
   /* --- fin findValue segun id --- */
 
   /* --- indexOf segun id --- */
-  const indexOfValue = arrProducts.indexOf(prod_3);
-  console.log("indexOf:", indexOfValue);
+  const indexOfValue = [articles.id].indexOf(50924);
+  //console.log("indexOf:", indexOfValue);
   /* --- fin indexOf segun id --- */
 
   /* --- sort segun id --- */
-  const sortedArr = arrProducts.sort((a, b) => {
-    /* --- orden ascendente individual --- */
-    // return a.id - b.id;
-    /* --- fin orden ascendente individual --- */
+  const sortedArr = [id].sort((a, b) => {
     /* --- orden descendente individual --- */
-    return b.id - a.id;
+    return b - a;
     /* --- fin orden descendente individual --- */
-
-    /* --- orden inmaculado individual ??? --- */
-    // return a.id === b.id;
-    /* --- fin orden inmaculado individual ??? --- */
 
     /* --- orden ascendente custom --- */
     /* if (a.id < b.id) {
@@ -161,10 +126,123 @@ document.addEventListener("DOMContentLoaded", (dmcntld) => {
     } */
     /* --- fin orden ascendente custom --- */
   });
-  console.log("sort:", sortedArr);
+  //console.log("sort:", sortedArr);
   /* --- fin sort segun id --- */
+
+  /* --- Implementacion funciones --- */
+  /* --- al cargar la pagina --- */
+  /* --- Subtotal general conjunto --- */
+  subtotalGeneral.innerHTML =
+    currency + " " + getSubtotalProduct(unitCost, amount);
+  /* --- fin Subtotal general conjunto --- */
+
+  /* --- fin al cargar la pagina --- */
+
+  /* --- al cambiar el tipo de envio --- */
+  radiosShippingType.forEach((shippingType) => {
+    shippingType.addEventListener("change", (chng) => {
+      //chng.target.parentNode ?
+      //ir hacia atras con for ? shippingType.parentElement.id ="frm-buy"
+      shippingCostGeneral.innerHTML =
+        currency +
+        " " +
+        getShippingCost(
+          getSubtotalProduct(amountProduct.value, unitCost),
+          shippingType.value
+        );
+
+      /* --- total a pagar conjunto --- */
+      totalCostGeneral.innerHTML =
+        currency +
+        " " +
+        getTotalToPay(
+          getSubtotalProduct(unitCost, amountProduct.value),
+          getShippingCost(
+            getSubtotalProduct(unitCost, amountProduct.value),
+            shippingType.value
+          )
+        );
+      /* --- fin total a pagar conjunto --- */
+    });
+  });
+  /* --- fin al cambiar el tipo de envio --- */
+
+  /* --- al cambiar la cantidad del producto --- */
+  amountProduct.addEventListener("input", (inpt) => {
+    /* --- Subtotal producto conjunto --- */
+    subtotalProduct.innerHTML =
+      currency + " " + getSubtotalProduct(unitCost, amountProduct.value);
+    /* --- Subtotal producto conjunto --- */
+
+    /* --- Subtotal general conjunto --- */
+    subtotalGeneral.innerHTML =
+      currency + " " + getSubtotalProduct(unitCost, amountProduct.value);
+    /* --- fin Subtotal general conjunto --- */
+
+    /* --- costo envio y total a pagar conjunto --- */
+    /* --- costo envio conjunto --- */
+    radiosShippingType.forEach((radio) => {
+      if (radio.checked) {
+        shippingCostGeneral.innerHTML =
+          currency +
+          " " +
+          getShippingCost(
+            getSubtotalProduct(unitCost, amountProduct.value),
+            radio.value
+          );
+        /* --- fin costo envio conjunto --- */
+
+        /* --- total a pagar conjunto --- */
+        totalCostGeneral.innerHTML =
+          currency +
+          " " +
+          getTotalToPay(
+            getSubtotalProduct(unitCost, amountProduct.value),
+            getShippingCost(
+              getSubtotalProduct(unitCost, amountProduct.value),
+              radio.value
+            )
+          );
+        /* --- fin total a pagar conjunto --- */
+      }
+    });
+    /* --- fin costo envio y total a pagar conjunto --- */
+  });
+  /* --- fin al cambiar la cantidad del producto --- */
+  /* --- fin Implementacion funciones --- */
 });
 /* --- fin DOMContentLoaded --- */
+
 // p1: 100, p2: 256, p3: 379
 // primero sumar todos, despues calcular 5% del total: 735 * 0.05 = 36.75
 // primero calcular 5% de c/u, despues sumar todos: 5 + 12.8 + 18.95 = 36,75
+// subtotalP1 = 10 * 5 = 50
+// subtotalP2 = 25 * 3 = 75
+/* --- logica calcular costos --- */
+//1. obtener subtotal del producto:
+// subtotalProducto = precioProducto * cantidadProducto
+
+//2. obtener subtotal general de los productos
+// subtotalGeneralProductos = subtotalProducto_1 + subtotalProducto_2 + subtotalProducto_3 + ... subtotalProducto_n
+
+//3. obtener costo de envio
+// costoEnvio = (subtotalProducto * tipoEnvio(5%, 7%, 15%)) / 100
+
+//4. obtener total a pagar
+// totalAPagar = subtotalProducto + costoEnvio
+/* --- fin logica calcular costos --- */
+
+/* --- logica implementacion calcular costos --- */
+//1. al cargar pagina
+//1.a. obtener productoCarritoPrecargado, productosCarritoLocalStorage
+//1.b. mostrar subtotalProducto, subtotalGeneralProductos del productoCarritoPrecargado
+
+//2. al cambiar cantidadProducto pagina
+//2.a. actualizar subtotalProducto, subtotalGeneralProductos, costoEnvio, totalAPagar
+
+//3. al cambiar tipoEnvio pagina
+//3.a. actualizar subtotalGeneralProductos, costoEnvio, totalAPagar
+
+//4. al eliminar producto pagina
+//4.a. actualizar subtotalGeneralProductos, costoEnvio, totalAPagar
+/* --- fin logica implementacion calcular costos --- */

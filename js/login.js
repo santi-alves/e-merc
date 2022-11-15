@@ -1,5 +1,7 @@
 /* --- Elimina email de local storage --- */
 window.localStorage.removeItem("userEmail");
+window.localStorage.removeItem("was_visited");
+window.localStorage.removeItem("userData");
 /* --------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
