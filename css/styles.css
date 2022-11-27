@@ -370,5 +370,22 @@ a:hover {
   border-color: rgba(118, 118, 118, 0.3) !important;
  /*  background-image: none !important; */
 }
+
+/* prueba buscador eliminar */
+.found {
+  background-color: yellow;
+}
+/* fin prueba buscador eliminar */
+
+/* selector contenedores categorias eliminar  */
+ #cat-list-container > [id*="10"] {
+  background-color: lightgray;
+ }
+
+ /* #main-container > div val(x > 1): {} ??? */
+ /* li {
+  color: orangered;
+ } */
+/* selector contenedores categorias eliminar  */
 /* ---- Fin Mis estilos ----- */
 

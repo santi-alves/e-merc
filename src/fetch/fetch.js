@@ -13,7 +13,7 @@ export const fetchData = async (url, methodHeadersBody) => {
         " (╯°□°）╯︵ ┻━┻"
     );
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     return error;
   }
 };

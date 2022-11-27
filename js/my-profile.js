@@ -1,3 +1,5 @@
+import { getJSONData } from "./init.js";
+
 const getDataLocal = (dataName) => {
   return JSON.parse(localStorage.getItem(dataName));
 };
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (dmcntld) => {
 
   /* --- funcion verificar primer visita stack overflow --- */
   // let first_visit = false;
-
+  getJSONData("http://localhost:3000/product-info/50744.json");
   /* function checkFirstVisit() {
     if (localStorage.getItem("was_visited")) {
       return;

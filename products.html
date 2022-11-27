@@ -259,10 +259,18 @@
       </div> -->
   <!-- ----------------------------------- -->
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
+
+  <script type="module" src="js/init.js"></script>
+  <script type="module" src="js/products.js"></script>
 
   <script src="src/search_bar/search_bar.js"></script>
+
+  <script>
+    const setProductID = (id) => {
+      localStorage.setItem("productID", id);
+      window.location = "product-info.html";
+    };
+  </script>
 </body>
 
 </html>

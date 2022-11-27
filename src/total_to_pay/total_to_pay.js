@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", async (dmcntld) => {
   // El subtotal general: la suma de los subtotales (costo por cantidad) de todos los artículos
 
   /* --- fetch repetido --- */
-  const cartPreloadedProds = await fetchData(CART_INFO_URL + 25801 + EXT_TYPE);
+  const cartPreloadedProds = await fetchData(
+    /* CART_INFO_URL + 25801 + EXT_TYPE */ "http://localhost:3000/cart/" /* CART_INFO_URL */ +
+      25801 +
+      /* EXT_TYPE */ ".json"
+  );
   const [articles] = cartPreloadedProds.articles;
   const { id, name, currency, unitCost, count: amount, image } = articles;
 

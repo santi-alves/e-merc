@@ -1,6 +1,9 @@
 import { fetchData } from "../src/fetch/fetch.js";
 
-const cartURL = CART_INFO_URL + 25801 + EXT_TYPE;
+const cartURL =
+  "http://localhost:3000/cart/" /* CART_INFO_URL */ +
+  25801 +
+  /* EXT_TYPE */ ".json";
 
 /* --- eliminar items de contenedor padre --- */
 export const itemRemove = (itemsToRemove, removeFromUI) => {

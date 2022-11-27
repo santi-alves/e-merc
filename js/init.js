@@ -10,8 +10,7 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
 const emercadoAPI = "https://japceibal.github.io/emercado-api/";
-//var dcmnt = new Window.prototype.document();
-/* ----------------- Definicion de Funciones  ----------------- */
+/* --- Definicion de Funciones  ---*/
 let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 };
@@ -44,29 +43,29 @@ let getJSONData = function (url) {
       return result;
     });
 };
-/* ------------------------------- */
+/* --- */
 
-/* --------- Funcion que almacena id del producto en almacenamiento local --------- */
+/* --- Funcion que almacena id del producto en almacenamiento local --- */
 function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html";
 }
-/* ---------- */
-/* --------- Funcion que almacena id de la categoria en almacenamiento local --------- */
+/* --- */
+/* --- Funcion que almacena id de la categoria en almacenamiento local --- */
 function setCatID(id) {
   localStorage.setItem("catID", id);
   window.location = "products.html";
 }
-/* ---------- */
+/* --- */
 
-/* ------------- Funcion que muestra email del usuario guardado en localStorage REACT ------------- */
+/* --- Funcion que muestra email del usuario guardado en localStorage REACT ---*/
 function loadUserEmail(cssSlctr) {
   if (location.pathname != "/index.html") {
     return (document.querySelector(cssSlctr).innerHTML =
       localStorage.getItem("userEmail"));
   }
 }
-/* ---------------------------------- */
+/* --- */
 
 /* --- Elimina email de local storage TERMINAR --- */
 /* const deleteUserEmail = (logOutBtn) => {
@@ -91,12 +90,12 @@ const logInCheck = (elementToInsert) => {
   }
 };
 
-/* document.onload = logInCheck(); */
+// document.onload = logInCheck();
 /* --- fin Verificacion inicio sesion ---- */
 
-/* --- DOMContentLoaded ---- */
+/* --- DOMContentLoaded --- */
 document.addEventListener("DOMContentLoaded", () => {
-  /* ----------------- Definicion de Variables ----------------- */
+  /* --- Definicion de Variables --- */
   const navFormSearch = document.querySelector("#nav-form-search");
   const formsAll = document.querySelectorAll("form");
   // --- No se usa mas ??? ---
@@ -147,12 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
       submit.preventDefault();
       //submit.stopPropagation();
     });
-    /* ----------------- fin Bootstrap validación login prevDefault -------------------- /
+    /* --- fin Bootstrap validación login prevDefault --- /
 
-    /* ---------------- Guarda email del usuario en localStorage para mostrarlo luego en la barra de navegación ------------------ /
+    /* --- Guarda email del usuario en localStorage para mostrarlo luego en la barra de navegación --- /
     localStorage.setItem("userEmail", inptEmail.value);
-    /* --------------------------- */
-  /* ----------- Redireccionamiento a la Página principal ----------- /
+    /* --- */
+  /* --- Redireccionamiento a la Página principal --- /
     window.location.href = "home.html";
   }
 }); */
@@ -160,4 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   logInCheck(navUserEmail);
 });
-/* --- fin DOMContentLoaded ---- */
+
+export { getJSONData, setCatID, setProductID, loadUserEmail };
+/* --- fin DOMContentLoaded --- */
