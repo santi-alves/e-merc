@@ -28,7 +28,7 @@
             <li class="nav-item">
               <a class="navbar-brand nav-link text-orange text-light" href="home.html"><strong>Inicio</strong></a>
             </li>
-            <!-- ---- Dropdown Categorias ---- -->
+            <!-- Dropdown Categorias -->
             <li class="nav-item dropdown mb-sm-2 me-sm-2 mb-lg-0 me-lg-0">
               <a class="nav-link dropdown-toggle text-light" href="#" id="navbar-dropdown-categories" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,12 +69,12 @@
                     onclick="setCatID(106)">Vestimenta</a></li>
               </ul>
             </li>
-            <!-- ---- Fin Dropdown Categorias ---- -->
+            <!-- Fin Dropdown Categorias -->
             <li class="nav-item">
               <a class="nav-link text-light" href="sell.html">Vender</a>
             </li>
           </div>
-          <!-- -------- Barra de busqueda -------- -->
+          <!-- Barra de busqueda -->
           <li class="nav-item col-sm-12 col-md-5 col-lg-6 col-xl-7">
             <form id="nav-form-search" class="d-flex input-group" action="">
               <input class="form-control rounded-start-pill" type="search" name="" id="nav-inpt-search"
@@ -84,21 +84,21 @@
               </button>
             </form>
           </li>
-          <!-- -------- fin Barra de busqueda -------- -->
-          <!-- ---- Dropdown menu usuario ---- -->
+          <!-- fin Barra de busqueda -->
+          <!-- Dropdown menu usuario -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-light" href="#" id="navbar-dropdown-user" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               <!-- Email usuario -->
             </a>
             <ul class="dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown-user">
-              <li><a id="idNavEmail" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
+              <li><a id="nav-my-profile" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
                   Mi perfil
-                  <!-- ---- perfil ---- -->
+                  <!-- perfil -->
                 </a></li>
               <li><a id="" class="dropdown-item text-indigo dropdown-item-active" href="cart.html">
                   Mi carrito
-                  <!-- -------- carrito -------- -->
+                  <!-- carrito -->
                 </a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -107,42 +107,12 @@
                   sesión</a></li>
             </ul>
           </li>
-          <!-- ---- Fin Dropdown menu usuario ---- -->
+          <!-- Fin Dropdown menu usuario -->
         </ul>
       </div>
     </div>
   </nav>
-  <!-- navbar orig jap -->
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="home.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a id="idNavEmail" class="nav-link" href="my-profile.html">
-              <!- ---- Email del usuario ingresado en el login ---- ->
-            </a>
-          </li>
-          <li id="idLogout" class="nav-item">
-            <a class="nav-link" href="index.html">Cerrar sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-  <!-- fin navbar orig jap -->
+
   <main class="pb-5">
     <div class="text-center p-4">
       <h2>Categorías</h2>
@@ -183,8 +153,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="list-group w-75 mx-auto" id="cat-list-container">
-          <!-- ----- Contenido a mostrar segun el id de la categoria ------ -->
+        <div class="list-group w-75 mx-auto" id="categories-list-container">
+          <!-- Contenido a mostrar segun el id de la categoria -->
         </div>
       </div>
     </div>
@@ -203,18 +173,7 @@
         obligatorio.</p>
     </div>
   </footer>
-  <!-- footer orig jap -->
-  <!-- <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer> -->
-  <!-- fin footer orig jap -->
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -224,8 +183,16 @@
     </div>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/categories.js"></script>
+
+  <script type="module" src="js/init.js"></script>
+  <script type="module" src="js/categories.js"></script>
+
+  <script>
+    function setCatID(id) {
+      localStorage.setItem("catID", id);
+      window.location = "products.html";
+    }
+  </script>
 </body>
 
 </html>

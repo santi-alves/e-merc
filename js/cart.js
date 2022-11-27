@@ -1,140 +1,173 @@
-const cartURL = CART_INFO_URL + 25801 + EXT_TYPE;
+import { fetchData } from "../src/fetch/fetch.js";
 
-/* --- fetch producto pre-cargado(REVISAR FUNCIONALIDAD) --- */
-const fetchInfo = async (url) => {
-  try {
-    const fetchProm = await fetch(url);
-    if (fetchProm.ok) {
-      fetchResp = await fetchProm.json();
-      return fetchResp;
-    } /* else {
-      throw Error(fetchProm.status + " " + fetchProm.statusText);
-    } */
-  } catch (error) {
-    return console.error(
-      error + " " + fetchProm.status + " " + fetchProm.statusText
-    );
+const cartURL =
+  "http://localhost:3000/cart/" /* CART_INFO_URL */ +
+  25801 +
+  /* EXT_TYPE */ ".json";
+
+/* --- eliminar items de contenedor padre --- */
+export const itemRemove = (itemsToRemove, removeFromUI) => {
+  for (const child of itemsToRemove.children) {
+    child.remove();
   }
+  removeFromUI.forEach((element) => {
+    element.innerHTML = "";
+  });
 };
-/* --- fin fetch producto pre-cargado(REVISAR FUNCIONALIDAD) --- */
+/* --- fin eliminar items de contenedor padre --- */
 
 /* --- DOMContentLoaded --- */
 document.addEventListener("DOMContentLoaded", async () => {
   /* --- definicion variables --- */
-  const cartPreloadedProds = await fetchInfo(cartURL);
-  let { id, name, currency, unitCost, count, image } =
-    cartPreloadedProds.articles[0];
+  const cartPreloadedProds = await fetchData(cartURL);
+  let {
+    id,
+    name,
+    currency,
+    unitCost,
+    count: amount,
+    image,
+  } = cartPreloadedProds.articles[0];
   const containerProducts = document.querySelector("#container-products");
-  //console.log(CART_INFO_URL + 25801 + EXT_TYPE);
-  const cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+  // REACTIVAR 03 ---> const cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+
+  const subtotalGeneral = document.querySelector("#subtotal-general-products");
+  const shippingCostGeneral = document.querySelector("#shipping-cost");
+  const totalCostGeneral = document.querySelector("#total-cost");
+
   /* --- fin definicion variables --- */
 
   /* --- Llamado funciones --- */
-  /* --- obtener producto precargado carrito REACTIV --- */
+  /* --- obtener producto precargado carrito --- */
   function getCartPreloadedProducts() {
     /* --- producto carrito categories template --- */
     /* <div id="containerProd-{i}" onclick="setProductID(${id})" class="list-group-item list-group-item-action cursor-active p-0 border-0 mb-3 rounded-borders shadow-sm"> */
-    return `<div id="containerProd-{i}" class="list-group-item list-group-item-action cursor-active p-0 border-0 mb-3 rounded-borders shadow-sm">
+    return `<div id="containerProd-{i}" class="list-group-item list-group-item-action cursor-active p-0 border-0 mb-3 rounded-borders shadow-sm sticky-top z-index-auto">
 <div class="row">
     <div class="col-3">
         <img src="${image}" alt="" class="img-thumbnail p-0 border-0 rounded-borders" onclick="setProductID(${id})">
     </div>
     <div class="col">
-        <div class="d-flex w-100 justify-content-between pt-3">
-            <h4 id="title-{i}" class="mb-1" onclick="setProductID(${id})">${name}</h4>
-            <h4 class="text-muted pe-3">${currency} ${unitCost}</h4>
-        </div>
-        <!-- <p class="mb-1">descripcion</p> -->
-         
-        <form class=" row align-items-center" action="" method="">
-        <div class="form-floating col-3">
-      <input id="amount-product" class="form-control rounded-borders" type="number" name="" min="1" value="${
-        /* cartPreloadedProds.articles[0]. */ count
-      }" placeholder="Cantidad">
+        <div class="d-flex w-100 justify-content-evenly pt-3">
+          <div>
+            <h4 id="title-{i}" class="mb-1 d-inline" onclick="setProductID(${id})">${name} </h4>
+            <h5 class="text-muted d-inline pe-3">- ${currency} ${unitCost}</h5>
+          </div>  
+
+          <form id="frm-product-amount" class="" action="#" method="get" novalidate>
+        <div class="form-floating col-8">
+      <input id="amount-product" class="form-control rounded-borders" type="number" name="" min="1" value="${amount}" placeholder="Cantidad" required>
       <label class="form-label" for="amount-product">Cantidad</label>
-      </div>
-      <div class="col">
-      <button id="btn-delete" class="btn btn-close" type="button"></button>
-      </div>
+     
+      <!-- <div class="invalid-feedback">
+      Debes tener al menos 1 artículo en el carrito.
+      </div> -->
+  </div>
     </form>
-    
+
+          <h4 id="subtotal-product" class="text-muted pe-3">${currency} ${unitCost}</h4> 
+        
+          <div class="col my-auto me-3">
+          <button id="btn-delete" class="btn btn-close " type="button" form="frm-product-amount"></button>
+          </div>
+        </div>
     </div>
-    <!-- ELIM <span class="" id="subtotal-cost">
-    subtotal ${currency} ${unitCost * count} 
-  </span> --> 
-</div>
+  </div>
 </div>`;
     /* --- fin producto carrito categories template --- */
   }
-  /* --- fin obtener producto precargado carrito REACTIV --- */
+  /* --- fin obtener producto precargado carrito --- */
 
-  /* --- REACTIVAR --- */
+  /* --- saber cual radio esta seleccionado (sirve de algo?) --- */
+  const whichIsChecked = (nodeListToCheck) => {
+    return nodeListToCheck.forEach((element) => {
+      if (element.checked) {
+        return element;
+      }
+    });
+  };
+  /* --- fin saber cual radio esta seleccionado (sirve de algo?) --- */
+
+  /* --- carrito precargado --- */
   containerProducts.innerHTML += getCartPreloadedProducts();
-  /* --- fin REACTIVAR --- */
+  /* --- fin carrito precargado --- */
 
-  /* --- Carrito original --- */
-  /*  const objRespCart = await userCartDetails(cartURL);
-  containerProducts.innerHTML += `<tr>
-  <td class="w-25"><img id="img-product" class="img-thumbnail w-75" src="${
-    objRespCart.articles[0].image
-  }" alt=""></td>
-  <td class="align-middle" id="name-product">${
-    objRespCart.articles[0].name
-  }</td>
-  <td class="align-middle" id="unit-currency-cost">${
-    objRespCart.articles[0].currency + " " + objRespCart.articles[0].unitCost
-  }</td>
-  <td>
-    <form class="form-floating" action="" method="">
-      <input id="amount-product" class="form-control-sm" type="number" name="" min="1" value="${
-        objRespCart.articles[0].count
-      }">
-    </form>
-  </td>
-  <td class="align-middle" id="subtotal-cost">
-    <!-- subtotal -->
-  </td>
-</tr>`; */
-  /* --- fin Carrito original --- */
+  /* --- Hacer que sea una funcion para reutilizarla --- */
+  let amountProduct = document.querySelector("#amount-product");
+  let allCosts_1_Product = {};
 
-  /* --- Hacer que sea una funcion para reutilizarla REACTIVAR --- */
-  const amountProduct = document.querySelector("#amount-product");
-  let subtotalProduct = document.querySelector("#subtotal-cost");
+  /* --- funcion todo en uno (no se esta usando) --- */
+  function getAllCostAmountChangeProduct(amountProduct, unitCost, elements) {
+    let subtotal_1_Product = getProductSubtotal(amountProduct.value, unitCost);
+    let shippingCost_1_Product;
+    elements.forEach((element) => {
+      shippingCost_1_Product = getShippingCost(
+        subtotal_1_Product,
+        element.value
+      );
+    });
 
-  amountProduct.addEventListener("change", () => {
-    if (amountProduct.value >= 1) {
-      let currentTotal =
-        amountProduct.value * cartPreloadedProds.articles[0].unitCost;
-      //currentTotal;
-      return (subtotalProduct.innerHTML = currency + " " + currentTotal);
-    } else {
-      amountProduct.value = 0;
-      return (subtotalProduct.innerHTML = currency + " " + 0);
-    }
-  });
-  /* --- fin Hacer que sea una funcion para reutilizarla REACTIVAR --- */
+    let totalToPay_1_Product = getTotalToPay(
+      subtotal_1_Product,
+      shippingCost_1_Product
+    );
+    return (allCosts_1_Product = {
+      subtotal_1_Product: subtotal_1_Product,
+      shippingCost_1_Product: shippingCost_1_Product,
+      totalToPay_1_Product: totalToPay_1_Product,
+    });
+  }
+  /* --- fin funcion todo en uno (no se esta usando) --- */
+
+  /* --- fin Hacer que sea una funcion para reutilizarla --- */
+
   /* --- fin Llamado funciones --- */
 
-  /* --- Guardar cantidad productos localstorage v3 PREV ACTIVO --- */
+  /* --- Guardar cantidad productos localstorage v3 PREV ACT--- */
   amountProduct.addEventListener("change", (event) => {
     //  event.returnValue = arrIdsCartProductsLocalStorage.splice(1, 1);
-    localStorage.setItem("cartProducts", JSON.stringify(amountProduct.value));
+    // REACTIVAR 03 ---> localStorage.setItem("cartProducts", JSON.stringify(amountProduct.value));
+    //subtotalGeneral.innerHTML = getCheckedRadioShippingType(radiosShippingType);
+    /* --- Subtotal inicial conjunto --- */
+    /* subtotalGeneral.innerHTML =
+      currency + " " + getProductSubtotal(amount, unitCost); */
+    /* --- fin Subtotal inicial conjunto --- */
   });
-  /* --- fin Guardar cantidad productos localstorage v3 PREV ACTIVO --- */
+  /* --- fin Guardar cantidad productos localstorage v3 PREV ACT--- */
 
-  /* --- cargar email usuario ---- */
-  // loadUserEmail("#navbar-dropdown-user");
-  /* --- fin cargar email usuario --- */
-
+  /* --- Eliminar producto del carrito --- */
   const btnDelete = document.querySelector("#btn-delete");
-  btnDelete.onclick = (evnt) => {
-    /*  containerProducts.childNodes.forEach((child) => {
-      child.remove();
-    }); */
-    //containerProducts.removeChild(containerProducts.children);
-    for (const child of containerProducts.children) {
-      child.remove();
-    }
+  btnDelete.onclick = (clck) => {
+    const fldstFrmGeneral = document.querySelector("#fldst-frm-buy");
+    const fldstFrmBuyInputs = document.querySelectorAll("#fldst-frm-buy input");
+    const invalidPaymentMethod = document.querySelector(
+      "#invalid-payment-method"
+    );
+    const paymentMethodSelected = document.querySelector(
+      "#payment-method-selected"
+    );
+    // console.log(clck.currentTarget.parentElement); <--- intentar iterar en jerarquia DOM hasta llegar a contenedor padre(comparar id), seleccionar y eliminar descendientes
+
+    itemRemove(containerProducts, [
+      subtotalGeneral,
+      shippingCostGeneral,
+      totalCostGeneral,
+    ]);
+
+    fldstFrmBuyInputs.forEach((input) => {
+      input.value = "";
+    });
+
+    paymentMethodSelected.innerHTML = "No se ha seleccionado.";
+    invalidPaymentMethod.classList.add("d-none");
+    fldstFrmGeneral.setAttribute("disabled", "true");
   };
+  /* --- fin Eliminar producto del carrito --- */
+
+  /* --- diferentes selectores btnDelete --- */
+  // JS path = document.querySelector("#btn-delete")
+  // xpath = //*[@id="btn-delete"]
+  // full xpath = /html/body/main/div/div/div[1]/div/div/div[2]/form/div[2]/button
+  /* --- fin diferentes selectores btnDelete --- */
 });
 /* --- fin DOMContentLoaded --- */

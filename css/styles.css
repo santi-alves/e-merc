@@ -265,7 +265,7 @@ a:hover {
 .btn-outline-indigo-hover:hover {
   font-weight: bold;
   color: var(--bs-indigo)
-} /* --- APLICAR A BTN --- */
+} /* --- APLICAR A BTN <--- ??? --- */
 
 .box-shadow-focus-none:focus {
   box-shadow: none !important;
@@ -343,25 +343,6 @@ a:hover {
   width: max-content !important;
 }
 
-/* --- estilos placeholder (no funcionan)--- */
-/* #nav-inpt-search > [pseudo=-webkit-input-placeholder] {
-  padding-left: 1rem !important;
-  margin-left: 1rem !important;
- color: red !important;
-} */
-
-/* #nav-inpt-search > #placeholder {
-  padding-left: 1rem !important;
-  margin-left: 1rem !important;
-  color: red !important;
-} */
-
-/* #nav-inpt-search::placeholder:text {
-  padding-left: 1rem !important;
-  margin-left: 1rem !important;
-} */
-/* --- estilos placeholder (no funcionan)--- */
-
 #text-field-container > * {
   padding-left: 3rem !important;
 }
@@ -372,10 +353,39 @@ a:hover {
 
 .light-toggler {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='whitesmoke' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/></svg>") !important;
-  /* border-color: whitesmoke !important;
-    border-width: .5rem !important; */
-}
+ }
 
 /* ---- Fin navbar(revisar) ---- */
 
+/* --- z-index-top --- */
+.z-index-top {
+  z-index: 1111 !important;
+  top: 10vh;
+ /*  bottom: 1vh; */
+}
+/* --- fin z-index-top --- */
+
+.radio-disabled:disabled {
+  background: none !important;
+  border-color: rgba(118, 118, 118, 0.3) !important;
+ /*  background-image: none !important; */
+}
+
+/* prueba buscador eliminar */
+.found {
+  background-color: yellow;
+}
+/* fin prueba buscador eliminar */
+
+/* selector contenedores categorias eliminar  */
+ #cat-list-container > [id*="10"] {
+  background-color: lightgray;
+ }
+
+ /* #main-container > div val(x > 1): {} ??? */
+ /* li {
+  color: orangered;
+ } */
+/* selector contenedores categorias eliminar  */
 /* ---- Fin Mis estilos ----- */
+

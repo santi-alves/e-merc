@@ -10,18 +10,23 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    <!-- -------- Fontawesome stars --------- -->
+    <!-- Fontawesome stars -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <!-- --------- -->
-    <!-- -------- Google Material Icons --------- -->
+    <!-- -->
+    <!-- Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- ------------- -->
+    <!-- -->
+
+    <!-- INTENTO DEFERED <script defer src="js/bootstrap.bundle.min.js"></script>
+    <script defer type="module" src="js/init.js"></script>
+    <script defer type="module" src="./src/fetch/fetch.js"></script>
+    <script defer type="module" src="js/product-info.js"></script> -->
 </head>
 
 <body>
     <!-- sticky navbar (agregar contenido) -->
     <div class="container-fluid h-5rm bg-indigo"></div>
-    <!-- sticky navbar (agregar contenido) -->
+    <!-- fin sticky navbar (agregar contenido) -->
     <nav class="navbar navbar-expand-md sticky-top navbar-light p-1 mb-3 gradient-indigo-semi-transparent">
         <div class="container">
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -35,7 +40,7 @@
                             <a class="navbar-brand nav-link text-orange text-light"
                                 href="home.html"><strong>Inicio</strong></a>
                         </li>
-                        <!-- ---- Dropdown Categorias ---- -->
+                        <!-- Dropdown Categorias -->
                         <li class="nav-item dropdown mb-sm-2 me-sm-2 mb-lg-0 me-lg-0">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbar-dropdown-categories"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,12 +81,12 @@
                                         onclick="setCatID(106)">Vestimenta</a></li>
                             </ul>
                         </li>
-                        <!-- ---- Fin Dropdown Categorias ---- -->
+                        <!-- Fin Dropdown Categorias -->
                         <li class="nav-item">
                             <a class="nav-link text-light" href="sell.html">Vender</a>
                         </li>
                     </div>
-                    <!-- -------- Barra de busqueda -------- -->
+                    <!-- Barra de busqueda -->
                     <li class="nav-item col-sm-12 col-md-5 col-lg-6 col-xl-7">
                         <form id="nav-form-search" class="d-flex input-group" action="">
                             <input class="form-control rounded-start-pill" type="search" name="" id="nav-inpt-search"
@@ -92,8 +97,8 @@
                             </button>
                         </form>
                     </li>
-                    <!-- -------- fin Barra de busqueda -------- -->
-                    <!-- ---- Dropdown menu usuario ---- -->
+                    <!-- fin Barra de busqueda -->
+                    <!-- Dropdown menu usuario -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" id="navbar-dropdown-user" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,14 +106,14 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbar-dropdown-user">
-                            <li><a id="idNavEmail" class="dropdown-item text-indigo dropdown-item-active"
+                            <li><a id="nav-my-profile" class="dropdown-item text-indigo dropdown-item-active"
                                     href="my-profile.html">
                                     Mi perfil
-                                    <!-- ---- perfil ---- -->
+                                    <!-- perfil -->
                                 </a></li>
                             <li><a id="" class="dropdown-item text-indigo dropdown-item-active" href="cart.html">
                                     Mi carrito
-                                    <!-- -------- carrito -------- -->
+                                    <!-- carrito -->
                                 </a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -118,14 +123,14 @@
                                     sesión</a></li>
                         </ul>
                     </li>
-                    <!-- ---- Fin Dropdown menu usuario ---- -->
+                    <!-- Fin Dropdown menu usuario -->
                 </ul>
             </div>
         </div>
     </nav>
     <main class="mb-3">
         <div class="container">
-            <!-- ---- Breadcrumbs bootstrap ---- -->
+            <!-- Breadcrumbs bootstrap -->
             <nav class="mb-3"
                 style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
                 aria-label="breadcrumb">
@@ -137,12 +142,12 @@
                     <li id="product-name-breadcrumbs" class="breadcrumb-item active fw-bold" aria-current="page"></li>
                 </ol>
             </nav>
-            <!-- ---- Fin Breadcrumbs bootstrap ---- -->
+            <!-- Fin Breadcrumbs bootstrap  -->
             <div id="main-container" class="">
-                <!-- ----- Contenido Detalles Producto ------ -->
+                <!-- Contenido Detalles Producto -->
                 <div id="" data-id="container-product-details" class="row pb-3">
-                    <!-- ----------- Product Info ---------- -->
-                    <!-- ----------- Bootstrap Carousel ------------ -->
+                    <!-- Product Info -->
+                    <!-- Bootstrap Carousel -->
                     <div id="carousel-product-images-container" class="col-sm-12 col-md-8 carousel slide mb-3"
                         data-bs-ride="carousel" data-wrap="true">
                         <div id="carousel-indicators-container" class="carousel-indicators">
@@ -162,14 +167,14 @@
                             <span class="visually-hidden">Siguiente</span>
                         </button>
                     </div>
-                    <!-- ----------- Fin Bootstrap Carousel ------------ -->
-                    <!-- ---- Bootstrap Card Product Info ---- -->
+                    <!-- Fin Bootstrap Carousel -->
+                    <!-- Bootstrap Card Product Info -->
                     <div class="col">
                         <div class="card mb-3 border-0 rounded-borders shadow-sm z-index-auto sticky-top">
                             <div class="card-body">
                                 <!-- titulo product info -->
                                 <h1 id="product-details-title" class="card-title display-6"></h1>
-                                <!-- -------- Estrellas Calificacion Promedio (Falta implementar funcionalidad, Agregar a funcion) -------- -->
+                                <!-- Estrellas Calificacion Promedio (Falta implementar funcionalidad, Agregar a funcion -->
                                 <div tabindex="0" data-average-user-score="" class="average-stars-container d-inline"
                                     data-bs-trigger="hover" data-bs-placement="auto" data-bs-toggle="popover"
                                     data-bs-trigger="focus" title=""
@@ -180,10 +185,10 @@
                                     <span class="star-item-4 fa fa-star"></span>
                                     <span class="star-item-5 fa fa-star"></span>
                                 </div>
-                                <!-- -------- Fin Estrellas Calificacion Promedio -------- -->
-                                <!-- --- cantidad vendida --- -->
+                                <!-- Fin Estrellas Calificacion Promedio -->
+                                <!-- cantidad vendida -->
                                 <small id="product-sold-count" class="text-muted d-block"></small>
-                                <!-- --- descripcion producto --- -->
+                                <!-- descripcion producto -->
                                 <p id="product-description" class="card-text"></p>
                                 <form class="form-floating mb-2" action="" method="">
                                     <input id="amount-product" class="form-control rounded-borders" type="number"
@@ -204,21 +209,22 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ---- Fin Bootstrap Card Product Info ---- -->
-                    <!-- ----------- Fin Product Info ---------- -->
+                    <!-- Fin Bootstrap Card Product Info -->
+                    <!-- Fin Product Info -->
                 </div>
-                <!-- ----- Fin Contenido Detalles Producto ------ -->
-                <!-- ----- Contenido Productos relacionados ------ -->
-                <!-- --- productos relacionados --- -->
+                <!-- Fin Contenido Detalles Producto -->
+
+                <!-- Contenido Productos relacionados -->
+                <!-- productos relacionados -->
                 <div id="container-related-products" class="row row-cols-2 justify-content-center album pb-3 mb-2">
-                    <!-- ----- Productos relacionados card plantilla categories ----- -->
+                    <!-- Productos relacionados card plantilla categories -->
                     <h3 class="w-100">Productos relacionados</h3>
                     <!-- productos relacionados -->
-                    <!-- ----- Fin Productos relacionados card plantilla categories ----- -->
+                    <!-- Fin Productos relacionados card plantilla categories -->
                 </div>
-                <!-- ----- Fin Contenido Productos relacionados ------ -->
-                <!-- ----- Contenido del Producto a mostrar segun el id del mismo ------ -->
-                <!-- ------ Realizar Comentario -------  -->
+                <!-- Fin Contenido Productos relacionados -->
+                <!-- Contenido del Producto a mostrar segun el id del mismo -->
+                <!-- Realizar Comentario -->
                 <!-- Agregar estilos de texto(italic, bold, etc) -->
                 <div class="container mb-2" id="comment-product">
                     <div class="row">
@@ -249,14 +255,14 @@
                         </form>
                     </div>
                 </div>
-                <!-- ------ Fin Realizar Comentario -------  -->
+                <!-- Fin Realizar Comentario -->
                 <hr class="mt-0">
-                <!-- ---------- Comentarios de otros usuarios ---------- -->
+                <!-- Comentarios de otros usuarios -->
                 <div id="comments-container" class="row list-group">
                     <h4 class="mt-0">Comentarios</h4>
-                    <!-- ----- List group Comentarios Bootsrap ----- -->
+                    <!-- List group Comentarios Bootstrap -->
                 </div>
-                <!-- ------ FIN Comentarios de otros usuarios -------  -->
+                <!-- Fin Comentarios de otros usuarios -->
             </div>
         </div>
     </main>
@@ -282,14 +288,18 @@
             <div></div>
         </div>
     </div>
+
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/product-info.js"></script>
-    <!-- -------- Alerta original -------- -->
-    <!-- <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div> -->
-    <!-- -------- Fin Alerta original -------- -->
+    <script type="module" src="js/init.js"></script>
+    <script type="module" src="./src/fetch/fetch.js"></script>
+    <script type="module" src="js/product-info.js"></script>
+
+    <script>
+        function setProductID(id) {
+            localStorage.setItem("productID", id);
+            window.location = "product-info.html";
+        }
+    </script>
 </body>
 
 </html>

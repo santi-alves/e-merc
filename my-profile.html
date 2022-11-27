@@ -106,7 +106,7 @@
               <!-- Email usuario -->
             </a>
             <ul class="dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown-user">
-              <li><a id="idNavEmail" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
+              <li><a id="nav-my-profile" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
                   Mi perfil
                   <!-- ---- perfil ---- -->
                 </a></li>
@@ -126,38 +126,8 @@
       </div>
     </div>
   </nav>
-  <!-- navbar orig jap -->
-  <!--  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="home.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a id="idNavEmail" class="nav-link" href="my-profile.html">
-              <!- ---- Email del usuario ingresado en el login ---- ->
-            </a>
-          </li>
-          <li id="idLogout" class="nav-item">
-            <a class="nav-link" href="index.html">Cerrar sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
-  <!-- fin navbar orig jap -->
-  <main>
+
+  <main class="mb-3">
     <div class="container">
       <!-- ---- Breadcrumbs bootstrap ---- -->
       <nav class="mb-3"
@@ -165,17 +135,93 @@
         aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="text-orange" href="home.html">Inicio</a></li>
-          <li class="breadcrumb-item"><a class="text-orange" href="categories.html">Categorias</a></li>
-          <li class="breadcrumb-item" aria-current="page"><a id="category-breadcrumbs" class="text-orange"
-              href="products.html"></a></li>
-          <li id="product-name-breadcrumbs" class="breadcrumb-item active fw-bold" aria-current="page"></li>
+          <li id="my-profile-breadcrumbs" class="breadcrumb-item active fw-bold" aria-current="page">Mi perfil</li>
         </ol>
       </nav>
       <!-- ---- Fin Breadcrumbs bootstrap ---- -->
 
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <h3 class="text-center mb-3">Mi perfil</h3>
+      <!-- Contenido perfil -->
+      <div class="row mb-3">
+        <div class="col-5 mx-auto">
+          <img id="user-img" src="img/user-image-placeholder.png" class="" height="100" alt="Imagen de usuario">
+        </div>
       </div>
+
+      <form id="frm-user-profile" class="form-floating" action="#" method="get" aria-required="true" novalidate>
+
+        <fieldset class="d-flex flex-column align-items-center" id="fieldset-user-profile">
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="text" class="form-control rounded-borders" id="inpt-first-name"
+                aria-describedby="first-name-help" placeholder="Nombre" minlength="4" maxlength="16" required>
+              <label for="inpt-first-name" class="form-label">Nombre *</label>
+              <div class="invalid-feedback text-end">
+                Debes ingresar un nombre.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="text" class="form-control rounded-borders" id="inpt-second-name"
+                aria-describedby="second-name-help" placeholder="Segundo nombre" minlength="4" maxlength="16">
+              <label for="inpt-second-name" class="form-label">Segundo nombre</label>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="text" class="form-control rounded-borders" id="inpt-first-lastname"
+                aria-describedby="first-lastname-help" placeholder="Apellido" minlength="3" maxlength="16" required>
+              <label for="inpt-first-lastname" class="form-label">Apellido *</label>
+              <div class="invalid-feedback text-end">
+                Debes ingresar un apellido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="text" class="form-control rounded-borders" id="inpt-second-lastname"
+                aria-describedby="second-lastname-help" placeholder="Segundo apellido" minlength="3" maxlength="16">
+              <label for="inpt-second-lastname" class="form-label">Segundo apellido</label>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="email" class="form-control rounded-borders" id="inpt-email" aria-describedby="email-help"
+                placeholder="Email" minlength="12" maxlength="32" required>
+              <label for="inpt-first-lastname" class="form-label">Email *</label>
+              <div class="invalid-feedback text-end">
+                Debes ingresar un email válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <div class="form-floating">
+              <input type="tel" class="form-control rounded-borders" id="inpt-phone" aria-describedby="phone-help"
+                placeholder="Teléfono" minlength="9" maxlength="32">
+              <label for="inpt-second-lastname" class="form-label">Teléfono</label>
+            </div>
+          </div>
+
+          <div class="col-5 mb-2">
+            <label for="inpt-user-image" class="form-label">Imagen de perfil</label>
+            <input class="form-control" type="file" accept=".png, .jpg, .jpeg" id="inpt-user-image">
+          </div>
+
+          <button id="btn-save-changes" class="btn bg-indigo text-light rounded-pill btn-indigo-hover w-25"
+            type="submit">
+            <strong>Guardar cambios</strong>
+          </button>
+        </fieldset>
+      </form>
+      <!-- fin Contenido perfil -->
+
     </div>
   </main>
   <footer class="bg-dark text-white-50 pt-2 pb-3">
@@ -192,21 +238,23 @@
         obligatorio.</p>
     </div>
   </footer>
-  <!-- foot org jap -->
-  <!--  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+
+  <!-- ------------ Spinners originales ------------ -->
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-  </footer> -->
-  <!-- foot org jap -->
+  </div>
+  <!-- ----------------------------------- -->
+
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
+  <script type="module" src="js/init.js"></script>
+  <script type="module" src="js/my-profile.js"></script>
+
+  <script type="module" src="/src/search_bar/search_bar.js"></script>
 </body>
 
 </html>

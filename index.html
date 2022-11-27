@@ -127,8 +127,12 @@
                                 class="fa fa-lock text-indigo"></i></div>
                         <div class="form-floating">
                             <input class="form-control rounded-end-pill" type="password" name="password" id="idPassword"
-                                placeholder="Contraseña" required>
+                                placeholder="Contraseña" autocomplete="off" required>
                             <label class="form-label" for="password">Ingresa tu contraseña</label>
+
+                            <!-- <div class="invalid-feedback text-end">
+                                Debes ingresar una contraseña.
+                            </div> -->
                         </div>
                     </div>
                     <!--  <div class="valid-feedback">Contraseña correcta</div>
@@ -240,7 +244,7 @@
 
     <!-- ----------------- JS -------------------- ---->
     <script src=" js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
+    <script type="module" src="js/init.js"></script>
     <script src="js/login.js"></script>
 </body>
 

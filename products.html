@@ -95,7 +95,7 @@
               <!-- Email usuario -->
             </a>
             <ul class="dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown-user">
-              <li><a id="idNavEmail" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
+              <li><a id="nav-my-profile" class="dropdown-item text-indigo dropdown-item-active" href="my-profile.html">
                   Mi perfil
                   <!-- ---- perfil ---- -->
                 </a></li>
@@ -141,7 +141,7 @@
           </li>
           <!- -------- ->
           <li class="nav-item">
-            <a id="idNavEmail" class="nav-link" href="my-profile.html">
+            <a id="nav-my-profile" class="nav-link" href="my-profile.html">
               <!- ---- Email del usuario ingresado en el login ---- ->
             </a>
           </li>
@@ -259,8 +259,18 @@
       </div> -->
   <!-- ----------------------------------- -->
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
+
+  <script type="module" src="js/init.js"></script>
+  <script type="module" src="js/products.js"></script>
+
+  <script src="src/search_bar/search_bar.js"></script>
+
+  <script>
+    const setProductID = (id) => {
+      localStorage.setItem("productID", id);
+      window.location = "product-info.html";
+    };
+  </script>
 </body>
 
 </html>
